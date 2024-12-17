@@ -7,6 +7,12 @@ ARG DEBCONF_NOWARNINGS="yes"
 ARG DEBIAN_FRONTEND="noninteractive"
 ARG DEBCONF_NONINTERACTIVE_SEEN="true"
 
+RUN echo "deb http://mirrors.tuna.tsinghua.edu.cn/debian/ trixie main" > /etc/apt/sources.list && \
+    echo "deb http://mirrors.tuna.tsinghua.edu.cn/debian/ trixie-updates main" >> /etc/apt/sources.list && \
+    echo "deb http://mirrors.tuna.tsinghua.edu.cn/debian-security trixie-security main" >> /etc/apt/sources.list && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN set -eu && \
     apt-get update && \
     apt-get --no-install-recommends -y install \
